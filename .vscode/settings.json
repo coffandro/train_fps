@@ -1,0 +1,7 @@
+{
+    "godotTools.editorPath.godot4": "/home/frida/.local/share/godot/app_userdata/Godots/versions/Godot_v4_6-stable_linux_x86_64/Godot_v4.6-stable_linux.x86_64",
+    "[csharp]": {
+        "editor.maxTokenizationLineLength": 2500,
+        "editor.formatOnSave": true
+    }
+}

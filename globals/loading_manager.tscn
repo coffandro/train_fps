@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bruch1b2k7gc3"]
+
+[ext_resource type="Script" uid="uid://c8lrne0pym7qa" path="res://globals/LoadingManager.cs" id="1_x4fx8"]
+
+[node name="LoadingManager" type="Node" unique_id=1272586602]
+process_mode = 3
+script = ExtResource("1_x4fx8")
