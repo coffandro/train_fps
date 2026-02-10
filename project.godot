@@ -29,6 +29,10 @@ window/size/viewport_height=720
 
 project/assembly_name="TrainFPS"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/item_editor/plugin.cfg")
+
 [input]
 
 move_right={

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cdlu0y83hc5ar"]
+
+[ext_resource type="Script" uid="uid://ddccc8df5rte2" path="res://tools/item_editor/ItemEditor.cs" id="1_nylv6"]
+[ext_resource type="Resource" uid="uid://d3wijatnbm376" path="res://items/weapons/sword.tres" id="2_m1vs7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m1vs7"]
+size = Vector3(0.25, 2.75, 0.25)
+
+[node name="ItemEditor" type="Node3D" unique_id=1778788861 node_paths=PackedStringArray("container", "collisionShape")]
+script = ExtResource("1_nylv6")
+item = ExtResource("2_m1vs7")
+container = NodePath("Container")
+collisionShape = NodePath("CollContainer/CollisionShape3D")
+
+[node name="Container" type="Node3D" parent="." unique_id=646606162]
+transform = Transform3D(0.77818835, 0, -0.62803096, 0, 1, 0, 0.62803096, 0, 0.77818835, 0, 0, 0)
+
+[node name="CollContainer" type="StaticBody3D" parent="." unique_id=470002656]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollContainer" unique_id=1539785748]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85, 0)
+shape = SubResource("BoxShape3D_m1vs7")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SwordItem" format=3 uid="uid://d3wijatnbm376"]
+
+[ext_resource type="Script" uid="uid://b6n4u0nxg33k8" path="res://items/res/SwordItem.cs" id="1_oxryh"]
+[ext_resource type="PackedScene" uid="uid://77fphy4irnjm" path="res://models/weapnos/sword.blend" id="2_1xj07"]
+
+[resource]
+script = ExtResource("1_oxryh")
+colliderSize = Vector3(0.25, 2.75, 0.25)
+colliderPos = Vector3(0, 1.85, 0)
+worldModel = ExtResource("2_1xj07")
+worldRot = Vector3(0, -38.905, 0)
+name = "Sword"
+metadata/_custom_type_script = "uid://b6n4u0nxg33k8"

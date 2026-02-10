@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://bsl2gj4krapct"]
+
+[ext_resource type="Script" uid="uid://bt45walepnhcv" path="res://items/weapons/Sword.cs" id="1_dqhhl"]
+[ext_resource type="Resource" uid="uid://d3wijatnbm376" path="res://items/weapons/sword.tres" id="2_id6xk"]
+
+[sub_resource type="Animation" id="Animation_id6xk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dqhhl"]
+resource_name = "Swing"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.5707964, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_id6xk"]
+_data = {
+&"RESET": SubResource("Animation_id6xk"),
+&"Swing": SubResource("Animation_dqhhl")
+}
+
+[node name="Sword" type="Node3D" unique_id=949379573 node_paths=PackedStringArray("player", "pivot", "container", "collisionShape")]
+script = ExtResource("1_dqhhl")
+swordItem = ExtResource("2_id6xk")
+player = NodePath("AnimationPlayer")
+pivot = NodePath("Pivot")
+container = NodePath("Pivot/MeshContainer")
+collisionShape = NodePath("Pivot/Detector/CollisionShape3D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1538192496]
+libraries/ = SubResource("AnimationLibrary_id6xk")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=430594145]
+
+[node name="MeshContainer" type="Node3D" parent="Pivot" unique_id=1431583442]
+
+[node name="Detector" type="Area3D" parent="Pivot" unique_id=1956683714]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/Detector" unique_id=2111390978]
+
+[connection signal="body_entered" from="Pivot/Detector" to="." method="_on_detector_body_entered"]

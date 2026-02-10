@@ -1,20 +1,20 @@
 [gd_scene format=3 uid="uid://dtyfid8bquhpw"]
 
 [ext_resource type="Script" uid="uid://bfdiyi81oalfy" path="res://entities/players/Player.cs" id="1_wqkxs"]
-[ext_resource type="PackedScene" uid="uid://fjwx41sci0ri" path="res://entities/players/hud.tscn" id="2_j1jhr"]
+[ext_resource type="PackedScene" uid="uid://fjwx41sci0ri" path="res://ui/hud.tscn" id="2_j1jhr"]
+[ext_resource type="PackedScene" uid="uid://bsl2gj4krapct" path="res://items/weapons/sword.tscn" id="2_kykd0"]
+[ext_resource type="Resource" uid="uid://d3wijatnbm376" path="res://items/weapons/sword.tres" id="2_sqlhh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l64x2"]
 height = 1.8
-
-[sub_resource type="SphereMesh" id="SphereMesh_j1jhr"]
-radius = 0.25
-height = 0.5
 
 [node name="Player" type="CharacterBody3D" unique_id=2090190221 node_paths=PackedStringArray("camera", "leftContainer", "rightContainer")]
 script = ExtResource("1_wqkxs")
 camera = NodePath("Head/Camera")
 leftContainer = NodePath("Head/Camera/UI/SubViewportContainer/SubViewport/ItemCamera/LeftHand")
 rightContainer = NodePath("Head/Camera/UI/SubViewportContainer/SubViewport/ItemCamera/RightHand")
+rightItem = ExtResource("2_sqlhh")
+swordContainer = ExtResource("2_kykd0")
 
 [node name="Collider" type="CollisionShape3D" parent="." unique_id=6552203]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -58,16 +58,8 @@ fov = 40.0
 [node name="LeftHand" type="Node3D" parent="Head/Camera/UI/SubViewportContainer/SubViewport/ItemCamera" unique_id=647562735]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, -1, -2.25)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Camera/UI/SubViewportContainer/SubViewport/ItemCamera/LeftHand" unique_id=2087940197]
-layers = 2
-mesh = SubResource("SphereMesh_j1jhr")
-
 [node name="RightHand" type="Node3D" parent="Head/Camera/UI/SubViewportContainer/SubViewport/ItemCamera" unique_id=1024644852]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, -1, -2.25)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Camera/UI/SubViewportContainer/SubViewport/ItemCamera/RightHand" unique_id=1934562152]
-layers = 2
-mesh = SubResource("SphereMesh_j1jhr")
 
 [node name="HUD" parent="Head/Camera/UI" unique_id=1403297240 instance=ExtResource("2_j1jhr")]
 layout_mode = 1

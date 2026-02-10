@@ -13,6 +13,11 @@ public partial class Player : CharacterBody3D {
 	[Export] public Node3D leftContainer;
 	[Export] public Node3D rightContainer;
 
+	[ExportGroup("Item Debug")]
+	[Export] public HandItem leftItem;
+	[Export] public HandItem rightItem;
+	[Export] public PackedScene swordContainer;
+
 	private bool mouseCaptured = true;
 
 	private Vector3 movementVelocity;
@@ -34,6 +39,25 @@ public partial class Player : CharacterBody3D {
 		leftContainerOffset = leftContainer.Position;
 		rightContainerOffset = rightContainer.Position;
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+
+		// Move to inventory system later
+		if (leftItem != null) {
+			SwordItem swordItem = leftItem as SwordItem;
+			if (swordItem != null) {
+				Sword container = swordContainer.Instantiate() as Sword;
+				container.swordItem = swordItem;
+				leftContainer.AddChild(container);
+			}
+		}
+
+		if (rightItem != null) {
+			SwordItem swordItem = rightItem as SwordItem;
+			if (swordItem != null) {
+				Sword container = swordContainer.Instantiate() as Sword;
+				container.swordItem = swordItem;
+				rightContainer.AddChild(container);
+			}
+		}
 	}
 
 	public override void _PhysicsProcess(double delta) {
@@ -64,6 +88,16 @@ public partial class Player : CharacterBody3D {
 		// Return state
 		if (IsOnFloor() && jumping) {
 			jumping = false;
+		}
+
+		// Actions
+		if (Input.IsActionJustPressed("shoot")) {
+			if (rightContainer.GetChildCount() > 0) {
+				ItemHand hand = rightContainer.GetChild(0) as ItemHand;
+				if (hand != null) {
+					hand.ActionUse();
+				}
+			}
 		}
 	}
 
