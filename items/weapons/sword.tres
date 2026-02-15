@@ -8,6 +8,5 @@ script = ExtResource("1_oxryh")
 colliderSize = Vector3(0.25, 2.75, 0.25)
 colliderPos = Vector3(0, 1.85, 0)
 worldModel = ExtResource("2_1xj07")
-worldRot = Vector3(0, -38.905, 0)
 name = "Sword"
 metadata/_custom_type_script = "uid://b6n4u0nxg33k8"

@@ -2,35 +2,56 @@ using Godot;
 
 [Tool]
 public partial class ItemEditor : Node3D {
-	[Export] public Item item;
+	private Item _item;
+
+	[Export]
+	public Item item {
+		get {
+			return _item;
+		}
+		set {
+			isModelDirty = true;
+			_item = value;
+		}
+	}
+
+	[ExportGroup("Settings")]
+	[Export] public float thickness;
 
 	[ExportGroup("Components")]
 	[Export] public Node3D container;
-	[Export] public CollisionShape3D collisionShape;
 
 	private BoxShape3D boxShape;
 	private PackedScene worldScene;
+	private bool isModelDirty = false;
 
 	public override void _Ready() {
 		base._Ready();
-
-		boxShape = new BoxShape3D();
-		collisionShape.Shape = boxShape;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
 		if (!Engine.IsEditorHint()) return;
+
+		if (isModelDirty) {
+			// Clear model
+			ClearChildren(container);
+			worldScene = null;
+		}
+
 		if (item == null) return;
 
-		HandItem handItem = item as HandItem;
-		if (item != null) {
-			HandleHandItem(handItem);
+		using (var _w1 = DebugDraw3D.NewScopedConfig().SetThickness(thickness)) {
 
-			// Sword items inherit hand items
-			SwordItem swordItem = handItem as SwordItem;
-			if (swordItem != null) {
-				HandleSwordItem(swordItem);
+			HandItem handItem = item as HandItem;
+			if (item != null) {
+				HandleHandItem(handItem);
+
+				// Sword items inherit hand items
+				SwordItem swordItem = handItem as SwordItem;
+				if (swordItem != null) {
+					HandleSwordItem(swordItem);
+				}
 			}
 		}
 	}
@@ -45,8 +66,6 @@ public partial class ItemEditor : Node3D {
 		}
 
 		if (worldScene != handItem.worldModel) {
-			ClearChildren(container);
-
 			worldScene = handItem.worldModel;
 
 			if (worldScene != null) {
@@ -58,18 +77,12 @@ public partial class ItemEditor : Node3D {
 	}
 
 	public void HandleSwordItem(SwordItem swordItem) {
-		if (collisionShape.Position != swordItem.colliderPos) {
-			collisionShape.Position = swordItem.colliderPos;
-		}
-
-		if (collisionShape.RotationDegrees != swordItem.colliderRot) {
-			collisionShape.RotationDegrees = swordItem.colliderRot;
-		}
-
-		if (boxShape.Size != swordItem.colliderSize) {
-			boxShape.Size = swordItem.colliderSize;
-			collisionShape.Shape = boxShape;
-		}
+		DebugDraw3D.DrawBox(
+			swordItem.colliderPos,
+			Quaternion.FromEuler(swordItem.colliderRot),
+			swordItem.colliderSize,
+			new Color(255, 0, 0), true
+		);
 	}
 
 	public void ClearChildren(Node parent) {
