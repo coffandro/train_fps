@@ -9,11 +9,16 @@ public enum Hand {
 [Tool]
 [GlobalClass]
 public partial class Item : Resource {
-    [Export] public string name;
-    [Export] public Hand requiredHand = Hand.NONE;
+    [ExportGroup("Item Model")]
+    [Export] public PackedScene model;
+    [Export] public Vector3 modelPos;
+    [Export] public Vector3 modelRot;
 
-    [ExportGroup("ItemModel")]
-    [Export] public PackedScene itemModel;
-    [Export] public Vector3 itemPos;
-    [Export] public Vector3 itemRot;
+    [ExportGroup("Bounding box")]
+    [Export] public Aabb bound;
+    [Export] public Vector3 boundRot;
+
+    [ExportGroup("")]
+    [Export] public Hand requiredHand = Hand.NONE;
+    [Export] public string name;
 }

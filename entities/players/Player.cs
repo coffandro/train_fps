@@ -14,8 +14,8 @@ public partial class Player : CharacterBody3D {
 	[Export] public Node3D rightContainer;
 
 	[ExportGroup("Item Debug")]
-	[Export] public HandItem leftItem;
-	[Export] public HandItem rightItem;
+	[Export] public Item leftItem;
+	[Export] public Item rightItem;
 	[Export] public PackedScene swordContainer;
 
 	private bool mouseCaptured = true;
@@ -91,9 +91,19 @@ public partial class Player : CharacterBody3D {
 		}
 
 		// Actions
-		if (Input.IsActionJustPressed("shoot")) {
+		if (Input.IsActionJustPressed("right_action")) {
 			if (rightContainer.GetChildCount() > 0) {
 				ItemHand hand = rightContainer.GetChild(0) as ItemHand;
+				if (hand != null) {
+					hand.ActionUse();
+				}
+			}
+		}
+
+		// Actions
+		if (Input.IsActionJustPressed("left_action")) {
+			if (leftContainer.GetChildCount() > 0) {
+				ItemHand hand = leftContainer.GetChild(0) as ItemHand;
 				if (hand != null) {
 					hand.ActionUse();
 				}

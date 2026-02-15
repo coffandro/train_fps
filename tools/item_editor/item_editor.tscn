@@ -8,7 +8,7 @@
 [node name="ItemEditor" type="Node3D" unique_id=1778788861 node_paths=PackedStringArray("container")]
 script = ExtResource("1_nylv6")
 item = ExtResource("2_m1vs7")
-thickness = 0.005
+thickness = 0.01
 container = NodePath("Container")
 
 [node name="Container" type="Node3D" parent="." unique_id=646606162]

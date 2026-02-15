@@ -15,19 +15,17 @@ public partial class Sword : ItemHand {
 
         // Set collider
         BoxShape3D shape = new BoxShape3D();
-        shape.Size = swordItem.colliderSize;
+        shape.Size = swordItem.collider.Size;
         collisionShape.Shape = shape;
-        collisionShape.Position = swordItem.colliderPos;
+        collisionShape.Position = swordItem.collider.Position;
         collisionShape.RotationDegrees = swordItem.colliderRot;
 
         // Set mesh
-        Node instanceNode = swordItem.worldModel.Instantiate();
+        Node instanceNode = swordItem.model.Instantiate();
         Node3D mesh = instanceNode as Node3D;
         container.AddChild(mesh);
-        container.Position = swordItem.worldPos;
-        container.RotationDegrees = swordItem.worldRot;
-
-        //
+        container.Position = swordItem.modelPos;
+        container.RotationDegrees = swordItem.modelRot;
     }
 
     public override void ActionUse() {
