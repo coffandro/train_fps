@@ -37,7 +37,7 @@ project/assembly_name="TrainFPS"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/yavc/plugin.cfg")
 
 [input]
 
@@ -124,3 +124,9 @@ weapon_toggle={
 [rendering]
 
 anti_aliasing/quality/screen_space_aa=1
+
+[yavc]
+
+server_host="127.0.0.1"
+server_port=7879
+username="User1"
